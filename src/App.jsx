@@ -137,7 +137,7 @@ function LoginPage({ onLogin, onRegister }) {
         <hr style={{ border:"none", borderTop:"1px solid #1e2d45", margin:"16px 0" }} />
         <p style={{ fontSize:13, color:"#546e8a" }}>No account? <button style={{ ...css.btnSm, display:"inline" }} onClick={onRegister}>Register</button></p>
         <div style={{ marginTop:16, padding:"10px 14px", background:"#111827", borderRadius:8, fontSize:12, color:"#546e8a" }}>
-          <strong style={{ color:"#38bdf8" }}>Demo:</strong><br/>teacher@unb.ca / Teacher@Pass1!<br/>admin@unb.ca / Admin@Pass1!
+          <strong style={{ color:"#38bdf8" }}>Demo:</strong><br/>teacher@unb.ca / Teacher@Pass1!<br/>admin@unb.ca / Admin@Pass1!<br/>alice@unb.ca / Student@Pass1!
         </div>
       </div>
     </div>
