@@ -70,7 +70,7 @@ router.post(
 
       db.run(
         `INSERT INTO users (full_name, email, password_hash, role, status)
-         VALUES (?, ?, ?, ?, 'pending')`,
+         VALUES (?, ?, ?, ?, 'active')`,
         [name.trim(), email, hashedPassword, role],
         function (err) {
           if (err) {
@@ -94,7 +94,7 @@ router.post(
           });
 
           return res.status(201).json({
-            message: "Account created successfully. Awaiting admin approval."
+            message: "Account created successfully. You can now sign in."
           });
         }
       );

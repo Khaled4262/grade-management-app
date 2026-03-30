@@ -168,7 +168,7 @@ function RegisterPage({ onLogin }) {
     try {
       await apiFetch("/auth/register", {
         method: "POST",
-        body: JSON.stringify({ name: sanitize(form.name), email: form.email.trim().toLowerCase(), role: form.role, password: form.pass }),
+        body: JSON.stringify({ name: sanitize(form.name), email: form.email.trim().toLowerCase(), role: form.role, password: form.pass, confirmPassword: form.confirm }),
       });
       setDone(true);
     } catch (e) {
@@ -180,7 +180,7 @@ function RegisterPage({ onLogin }) {
 
   if (done) return (
     <div style={css.main}><div style={css.card}>
-      <div style={css.ok}>Account created. Awaiting admin approval before you can log in.</div>
+      <div style={css.ok}>Account created. You can now sign in.</div>
       <button style={css.btn} onClick={onLogin}>Back to sign in</button>
     </div></div>
   );
