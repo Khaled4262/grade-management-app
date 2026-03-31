@@ -46,13 +46,13 @@ Four tables are created automatically on first run:
 | Feature | Student | Teacher | Admin |
 |---|---|---|---|
 | View own grades | ✅ | — | — |
-| View all grades | — | ✅ | ✅ |
-| Upload CSV grades | — | ✅ | ✅ |
-| Submit feedback | ✅ | ✅ | ✅ |
+| View all grades | — | ✅ | — |
+| Upload CSV grades | — | ✅ | — |
+| Submit feedback | ✅ | ✅ | — |
 | Manage users | — | — | ✅ |
 | Suspend / reactivate users | — | — | ✅ |
 | View audit logs | — | — | ✅ |
-| Add users (with temp password) | — | — | ✅ |
+| Add users  | — | — | ✅ |
  
 ---
  
