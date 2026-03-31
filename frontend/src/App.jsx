@@ -288,9 +288,10 @@ function TeacherDashboard({ user }) {
         <div>
           {gradesErr && <div style={css.err}>{gradesErr}</div>}
           <table style={{ width:"100%", borderCollapse:"collapse", fontSize:13 }}>
-            <thead><tr>{["Student","Course","Assignment","Grade"].map((h) => <th key={h} style={css.th}>{h}</th>)}</tr></thead>
+            <thead><tr>{["Student ID","Student","Course","Assignment","Grade"].map((h) => <th key={h} style={css.th}>{h}</th>)}</tr></thead>
             <tbody>{grades.map((g,i) => (
               <tr key={i}>
+                <td style={css.td}>{g.student_id}</td>
                 <td style={css.td}>{g.student}</td>
                 <td style={css.td}>{g.course}</td>
                 <td style={css.td}>{g.assignment}</td>

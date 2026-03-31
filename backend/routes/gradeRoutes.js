@@ -49,6 +49,7 @@ router.get("/", requireAuth, (req, res) => {
     db.all(
       `SELECT
          g.id,
+         g.student_id,
          s.full_name AS student,
          g.course,
          g.assignment,
