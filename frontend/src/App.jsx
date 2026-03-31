@@ -233,6 +233,8 @@ function TeacherDashboard({ user }) {
   const [fileOk, setFileOk]     = useState("");
   const [feedback, setFeedback] = useState("");
   const [fbOk, setFbOk]         = useState(false);
+  const [students, setStudents] = useState([]);
+  const [studentsErr, setStudentsErr] = useState("");
 
   // fetch all grades when the grades tab is active
   useEffect(() => {
@@ -241,6 +243,14 @@ function TeacherDashboard({ user }) {
     apiFetch("/grades")
       .then((data) => setGrades(data.grades || []))
       .catch((e) => setGradesErr(e.message));
+  }, [tab]);
+
+    useEffect(() => {
+    if (tab !== "students") return;
+    setStudentsErr("");
+    apiFetch("/users/students")
+      .then((data) => setStudents(data.users || []))
+      .catch((e) => setStudentsErr(e.message));
   }, [tab]);
 
   // validates file type and size before letting it through (CWE-434)
@@ -281,7 +291,7 @@ function TeacherDashboard({ user }) {
       <h2 style={{ color:"#e2e8f0", marginBottom:4 }}>Welcome, {user.name}</h2>
       <p style={{ fontSize:13, color:"#546e8a", marginBottom:24 }}>Role: <span style={css.badge("cyan")}>Teacher</span></p>
       <div style={{ display:"flex", gap:4, background:"#0b0f1a", border:"1px solid #1e2d45", borderRadius:10, padding:4, marginBottom:24 }}>
-        {["grades","upload","feedback"].map((t) => <button key={t} style={css.tab(tab===t)} onClick={() => setTab(t)}>{{ grades:"Grades", upload:"Upload", feedback:"Feedback" }[t]}</button>)}
+        {["grades","upload","feedback","students"].map((t) => <button key={t} style={css.tab(tab===t)} onClick={() => setTab(t)}>{{ grades:"Grades", upload:"Upload", feedback:"Feedback", students:"All Students" }[t]}</button>)}
       </div>
 
       {tab==="grades" && (
@@ -323,6 +333,29 @@ function TeacherDashboard({ user }) {
           <textarea style={{ ...css.input, height:120, resize:"vertical", marginBottom:6 }} placeholder="Write here…" maxLength={1000} value={feedback} onChange={(e) => setFeedback(sanitize(e.target.value))} />
           <p style={css.note}>{feedback.length}/1000 · Sanitized before storage (CWE-79)</p>
           <button style={{ ...css.btn, marginTop:12 }} onClick={submitFeedback}>Submit</button>
+        </div>
+      )}
+         {tab === "students" && (
+        <div>
+          {studentsErr && <div style={css.err}>{studentsErr}</div>}
+          <table style={{ width:"100%", borderCollapse:"collapse", fontSize:13 }}>
+            <thead>
+              <tr>
+                {["ID","Name","Email"].map((h) => (
+                  <th key={h} style={css.th}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {students.map((s) => (
+                <tr key={s.id}>
+                  <td style={css.td}>{s.id}</td>
+                  <td style={css.td}>{s.name}</td>
+                  <td style={{ ...css.td, fontFamily:"'IBM Plex Mono',monospace", fontSize:12 }}>{s.email}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
